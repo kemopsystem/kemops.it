@@ -29,7 +29,7 @@ button, input, textarea, select { font: inherit; }
 .site-header.scrolled { padding: 10px 0; background: rgba(4,20,47,.92); backdrop-filter: blur(18px); box-shadow: 0 1px 0 rgba(255,255,255,.08); }
 .nav-wrap { display: flex; align-items: center; justify-content: space-between; }
 .brand { display: inline-flex; align-items: center; gap: 9px; font: 800 1.25rem/1 "Manrope", sans-serif; letter-spacing: -.045em; }
-.brand > img { width: 44px; height: 44px; object-fit: cover; object-position: 50% 26%; border-radius: 9px; }
+.brand > img { width: 52px; height: 52px; object-fit: contain; object-position: center; }
 .brand > span > span { color: var(--cyan); }
 .main-nav { display: flex; align-items: center; gap: 34px; font-size: .9rem; font-weight: 600; }
 .main-nav > a { position: relative; opacity: .78; transition: opacity .2s, color .2s; }
@@ -66,7 +66,7 @@ h1 em, h2 em, blockquote em { color: var(--cyan-bright); font-style: normal; }
 .hero-visual { position: relative; aspect-ratio: 1; max-width: 560px; justify-self: end; width: 100%; }
 .hero-visual::before { content: ""; position: absolute; inset: 13%; border: 1px solid rgba(8,197,220,.16); transform: rotate(45deg); }
 .visual-core { position: absolute; inset: 27%; border: 1px solid rgba(8,197,220,.46); background: rgba(5,29,67,.7); backdrop-filter: blur(10px); display: grid; place-items: center; transform: rotate(45deg); box-shadow: 0 0 80px rgba(8,197,220,.12); }
-.visual-core img { width: 72%; transform: rotate(-45deg); clip-path: inset(9% 8% 22%); }
+.visual-core img { width: 100%; max-width: none; transform: rotate(-45deg); }
 .visual-orbit { position: absolute; border: 1px solid rgba(255,255,255,.12); border-radius: 50%; }
 .orbit-one { inset: 8%; animation: spin 24s linear infinite; }
 .orbit-one::before, .orbit-two::before { content: ""; position: absolute; top: 48%; left: -5px; width: 10px; height: 10px; background: var(--cyan); border-radius: 50%; box-shadow: 0 0 20px var(--cyan); }
@@ -260,7 +260,7 @@ h1 em, h2 em, blockquote em { color: var(--cyan-bright); font-style: normal; }
 @media (max-width: 640px) {
   .container { width: min(calc(100% - 28px), var(--max)); }
   .section { padding: 85px 0; }
-  .brand > img { width: 38px; height: 38px; }
+  .brand > img { width: 46px; height: 46px; }
   .hero { min-height: 820px; padding-top: 125px; align-items: flex-start; }
   .hero h1 { font-size: clamp(3.05rem,15vw,4.2rem); }
   .hero-visual { width: 96vw; right: -32vw; bottom: -4vw; }
