@@ -31,13 +31,20 @@ button, input, textarea, select { font: inherit; }
 .brand { display: inline-flex; align-items: center; gap: 9px; font: 800 1.25rem/1 system-ui, sans-serif; letter-spacing: -.045em; }
 .brand > img { width: 52px; height: 52px; object-fit: contain; object-position: center; }
 .brand > span > span { color: var(--cyan); }
-.main-nav { display: flex; align-items: center; gap: 34px; font-size: .9rem; font-weight: 600; }
+.main-nav { display: flex; align-items: center; gap: clamp(10px, 1.35vw, 18px); font-size: .86rem; font-weight: 600; }
+.nav-contact-actions { display: flex; align-items: center; gap: 6px; }
+.main-nav .nav-contact-link { display: inline-flex; align-items: center; min-height: 38px; padding: 7px 9px; border: 1px solid rgba(255,255,255,.16); border-radius: 4px; color: rgba(255,255,255,.86); font-size: .73rem; white-space: nowrap; opacity: 1; }
+.main-nav .nav-contact-link:hover { color: var(--white); background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.32); }
+.main-nav .nav-whatsapp { border-color: rgba(37,211,102,.48); color: #a9f3c1; }
+.main-nav .nav-whatsapp:hover { background: rgba(37,211,102,.14); border-color: #25d366; }
+.main-nav .nav-cta { white-space: nowrap; font-size: .77rem; padding: 11px 12px; }
 .main-nav > a { position: relative; opacity: .78; transition: opacity .2s, color .2s; }
 .main-nav > a:hover, .main-nav > a.active { opacity: 1; color: var(--cyan-bright); }
 .main-nav > a:not(.nav-cta)::after { content: ""; position: absolute; left: 0; bottom: -7px; width: 0; height: 1px; background: var(--cyan); transition: width .25s; }
 .main-nav > a:hover::after, .main-nav > a.active::after { width: 100%; }
-.main-nav .nav-cta { padding: 12px 17px; border: 1px solid rgba(255,255,255,.3); color: var(--white); opacity: 1; }
+.main-nav .nav-cta { padding: 11px 12px; border: 1px solid rgba(255,255,255,.3); color: var(--white); opacity: 1; white-space: nowrap; font-size: .77rem; }
 .main-nav .nav-cta:hover { background: var(--cyan); border-color: var(--cyan); color: var(--ink); }
+.mobile-write-link { display: none; }
 .menu-toggle { display: none; color: inherit; background: none; border: 0; padding: 8px; }
 .menu-toggle > span:not(.sr-only) { display: block; width: 24px; height: 1px; margin: 5px 0; background: currentColor; transition: .25s; }
 
@@ -56,6 +63,9 @@ h1 em, h2 em, blockquote em { color: var(--cyan-bright); font-style: normal; }
 .button:hover { transform: translateY(-3px); }
 .button-primary { background: var(--cyan); color: var(--ink); }
 .button-primary:hover { background: var(--cyan-bright); }
+.button-whatsapp { color: var(--white); background: #168a52; border-color: #168a52; }
+.button-whatsapp:hover { color: var(--white); background: #117544; border-color: #117544; }
+.cta-actions { gap: 10px; }
 .button-ghost { color: var(--white); border-color: rgba(255,255,255,.25); }
 .button-ghost:hover { border-color: var(--white); background: rgba(255,255,255,.06); }
 .button-dark { background: var(--ink); color: var(--white); }
@@ -185,11 +195,15 @@ h1 em, h2 em, blockquote em { color: var(--cyan-bright); font-style: normal; }
 .contact-hero { min-height: 100svh; color: var(--white); padding: 170px 0 105px; background: var(--ink); }
 .contact-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 100px; align-items: start; }
 .contact-copy { position: sticky; top: 140px; }
+#contact-form { scroll-margin-top: 110px; }
+.contact-quick-actions { margin: 30px 0 0; }
+.contact-quick-actions .button { gap: 8px; padding-inline: 14px; font-size: .78rem; }
 .contact-copy h1 { font-size: clamp(3.3rem,5.4vw,6rem); line-height: .98; letter-spacing: -.065em; margin-bottom: 30px; }
 .contact-copy > p:not(.eyebrow) { color: rgba(255,255,255,.62); max-width: 520px; font-size: 1.08rem; line-height: 1.7; }
 .direct-contact { margin-top: 55px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.15); }
 .direct-contact span { display: block; color: rgba(255,255,255,.42); font-size: .72rem; margin-bottom: 9px; }
-.direct-contact a { color: var(--cyan); font: 600 1.2rem system-ui; }
+.direct-contact a { display: inline-flex; min-height: 40px; align-items: center; color: var(--cyan); font: 600 1.05rem system-ui; }
+.direct-contact .contact-email { font-size: .94rem; overflow-wrap: anywhere; }
 .contact-form { background: var(--white); color: var(--ink); padding: 45px; }
 .contact-form label { display: block; font-size: .76rem; font-weight: 700; margin-bottom: 25px; }
 .contact-form label > span { color: var(--muted); font-weight: 400; }
@@ -225,6 +239,7 @@ h1 em, h2 em, blockquote em { color: var(--cyan-bright); font-style: normal; }
 
 @media (max-width: 980px) {
   .container { width: min(calc(100% - 36px), var(--max)); }
+  .mobile-write-link { display: inline-flex; min-height: 44px; align-items: center; margin-left: auto; margin-right: 8px; padding: 8px 5px; color: var(--cyan-bright); font-size: .82rem; font-weight: 700; white-space: nowrap; }
   .menu-toggle { display: block; z-index: 2; }
   .menu-open .menu-toggle > span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
   .menu-open .menu-toggle > span:nth-child(2) { opacity: 0; }
@@ -232,7 +247,10 @@ h1 em, h2 em, blockquote em { color: var(--cyan-bright); font-style: normal; }
   .main-nav { position: fixed; inset: 0; flex-direction: column; justify-content: center; align-items: flex-start; padding: 90px 10vw; gap: 22px; background: var(--ink); transform: translateX(100%); visibility: hidden; transition: transform .4s var(--ease), visibility .4s; }
   .main-nav.open { transform: none; visibility: visible; }
   .main-nav > a { font: 600 2.2rem system-ui; letter-spacing: -.04em; }
-  .main-nav .nav-cta { margin-top: 18px; font-size: 1rem; }
+  .nav-contact-actions { flex-direction: column; align-items: flex-start; gap: 2px; }
+  .main-nav .nav-contact-link { min-height: 42px; padding: 7px 0; border: 0; border-radius: 0; font-size: 1.2rem; }
+  .main-nav .nav-contact-link:hover { background: none; }
+  .main-nav .nav-cta { margin-top: 10px; font-size: 1rem; }
   .hero-grid { grid-template-columns: 1fr; }
   .hero-copy { z-index: 2; }
   .hero-media { justify-self: center; max-width: 620px; }
@@ -337,7 +355,8 @@ h1 em, h2 em, blockquote em { color: var(--cyan-bright); font-style: normal; }
 .faq-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 100px; align-items: start; }
 .faq-intro h2 { font-size: clamp(2.7rem, 4vw, 4.6rem); line-height: 1.02; letter-spacing: -.06em; }
 .faq-intro > p:not(.eyebrow) { max-width: 410px; color: #5d6878; line-height: 1.7; }
-.faq-intro .text-link { display: inline-block; margin-top: 22px; }
+.faq-contact-links { display: grid; justify-items: start; gap: 12px; margin-top: 22px; }
+.faq-intro .text-link, .faq-contact-links .text-link { display: inline-block; margin-top: 0; }
 .faq-list { border-top: 1px solid var(--line); }
 .faq-list details { border-bottom: 1px solid var(--line); }
 .faq-list summary { position: relative; padding: 22px 38px 22px 0; font-weight: 700; line-height: 1.45; cursor: pointer; list-style: none; }
@@ -368,6 +387,8 @@ h1 em, h2 em, blockquote em { color: var(--cyan-bright); font-style: normal; }
   .main-nav { z-index: 101; inset: 0; padding: max(100px, calc(env(safe-area-inset-top) + 88px)) 9vw max(40px, env(safe-area-inset-bottom)); overflow-y: auto; }
   .main-nav > a { min-height: 48px; display: inline-flex; align-items: center; }
   .main-nav .nav-cta { min-height: 48px; padding: 12px 18px; }
+  .nav-contact-actions { gap: 0; }
+  .main-nav .nav-contact-link { min-height: 44px; font-size: 1.15rem; }
   .possibility-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .faq-grid { grid-template-columns: 1fr; gap: 38px; }
   .service-jump .container { gap: 20px; }
@@ -479,7 +500,7 @@ h1 em, h2 em, blockquote em { color: var(--cyan-bright); font-style: normal; }
   .collaboration-grid p { font-size: .92rem; line-height: 1.6; }
   .contact-hero { min-height: 0; padding: max(120px, calc(env(safe-area-inset-top) + 104px)) 0 68px; }
   .contact-grid { gap: 35px; }
-  .contact-copy h1 { font-size: clamp(2.75rem, 12vw, 4rem); }
+.contact-copy h1 { font-size: clamp(2.75rem, 12vw, 4rem); }
   .contact-copy > p:not(.eyebrow) { font-size: 1rem; line-height: 1.65; }
   .direct-contact { margin-top: 30px; }
   .direct-contact a { display: inline-flex; min-height: 44px; align-items: center; font-size: 1.05rem; }
@@ -496,18 +517,20 @@ h1 em, h2 em, blockquote em { color: var(--cyan-bright); font-style: normal; }
   .legal-wrap h1 { font-size: clamp(2.8rem, 13vw, 4rem); }
   .legal-intro { font-size: 1.08rem; }
   .legal-wrap p { font-size: .95rem; }
-  body:has(.mobile-contact-cta) .site-footer { padding-bottom: calc(86px + env(safe-area-inset-bottom)); }
-  .mobile-contact-cta { position: fixed; z-index: 90; right: 12px; bottom: calc(10px + env(safe-area-inset-bottom)); left: 12px; display: flex; min-height: 58px; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 16px; border: 1px solid rgba(255,255,255,.15); border-radius: 8px; color: var(--white); background: rgba(4,20,47,.97); box-shadow: 0 8px 30px rgba(4,20,47,.28); }
-  .mobile-contact-cta > span { font-size: .74rem; color: rgba(255,255,255,.74); }
-  .mobile-contact-cta strong { display: inline-flex; align-items: center; gap: 8px; color: var(--cyan-bright); font-size: .9rem; white-space: nowrap; }
+  body:has(.mobile-contact-cta) .site-footer { padding-bottom: calc(92px + env(safe-area-inset-bottom)); }
+  .mobile-contact-cta { position: fixed; z-index: 90; right: 12px; bottom: calc(10px + env(safe-area-inset-bottom)); left: 12px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; min-height: 58px; padding: 6px; border: 1px solid rgba(255,255,255,.15); border-radius: 8px; background: rgba(4,20,47,.97); box-shadow: 0 8px 30px rgba(4,20,47,.28); }
+  .mobile-contact-cta a { display: flex; min-width: 0; min-height: 44px; align-items: center; justify-content: center; padding: 0 5px; border-radius: 5px; color: var(--white); font-size: .76rem; font-weight: 750; white-space: nowrap; }
+  .mobile-contact-cta .mobile-whatsapp { background: #168a52; }
+  .mobile-contact-cta .mobile-form { color: var(--ink); background: var(--cyan); }
+  .mobile-contact-cta .mobile-call { background: #0a4aaa; }
 }
 
 @media (max-width: 360px) {
   .container { width: calc(100% - 26px); }
   .hero h1 { font-size: 2.7rem; }
-  .mobile-contact-cta { right: 8px; left: 8px; padding-inline: 12px; }
-  .mobile-contact-cta > span { font-size: .68rem; }
-  .mobile-contact-cta strong { font-size: .82rem; }
+  .mobile-contact-cta { right: 8px; left: 8px; gap: 4px; }
+  .mobile-contact-cta a { font-size: .7rem; }
+
 }
 
 @media (prefers-reduced-motion: reduce) {

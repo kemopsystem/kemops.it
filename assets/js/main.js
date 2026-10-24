@@ -70,7 +70,7 @@ document.querySelector('[data-contact-form]')?.addEventListener('submit', async 
   const emailFallback = form.querySelector('[data-form-email-fallback]');
   const formData = new FormData(form);
   const controller = new AbortController();
-  const timeoutId = window.setTimeout(() => controller.abort(), 15000);
+  const timeoutId = window.setTimeout(() => controller.abort(), 20000);
 
   const prepareEmailFallback = () => {
     if (!emailFallback) return;
@@ -95,18 +95,24 @@ document.querySelector('[data-contact-form]')?.addEventListener('submit', async 
   if (status) status.textContent = 'Invio della richiesta in corso...';
 
   try {
-    const response = await fetch('https://formsubmit.co/ajax/kemops.consulting@gmail.com', {
+    const response = await fetch(form.action, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify(Object.fromEntries(formData.entries())),
+      headers: { Accept: 'application/json' },
+      body: formData,
       signal: controller.signal
     });
-    const result = await response.json();
-    if (!response.ok || String(result.success).toLowerCase() !== 'true') {
-      throw new Error('FormSubmit did not confirm the request');
+    let result;
+    try {
+      result = await response.json();
+    } catch {
+      throw new Error('Il servizio non ha restituito una risposta valida.');
+    }
+    const confirmed = result.ok === true || String(result.success).toLowerCase() === 'true';
+    if (!response.ok || !confirmed) {
+      const providerMessage = Array.isArray(result.errors)
+        ? result.errors.map(item => item.message).filter(Boolean).join(' ')
+        : '';
+      throw new Error(providerMessage || 'Il servizio non ha accettato la richiesta.');
     }
     form.reset();
     if (emailFallback) emailFallback.hidden = true;
@@ -114,9 +120,9 @@ document.querySelector('[data-contact-form]')?.addEventListener('submit', async 
   } catch (error) {
     prepareEmailFallback();
     if (error.name === 'AbortError') {
-      if (status) status.textContent = 'Il servizio non ha confermato l’invio entro 15 secondi. La richiesta potrebbe comunque essere arrivata: controlla la casella prima di reinviarla. Se non la trovi, puoi preparare un’email con gli stessi dati qui sotto.';
+      if (status) status.textContent = 'Il servizio non ha confermato l’invio entro 20 secondi. La richiesta potrebbe essere arrivata: controlla la casella o l’area Formspree prima di reinviarla. In alternativa, puoi preparare un’email qui sotto.';
     } else if (status) {
-      status.textContent = 'Non ho ricevuto conferma dell’invio automatico. Controlla la casella; se la richiesta non è arrivata, puoi preparare un’email con gli stessi dati qui sotto.';
+      status.textContent = `Invio non confermato: ${error.message} Se la richiesta non compare nell’area Formspree, puoi preparare un’email con i dati inseriti qui sotto.`;
     }
   } finally {
     window.clearTimeout(timeoutId);

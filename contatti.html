@@ -31,7 +31,7 @@
       <a class="brand" href="index.html" aria-label="KemOps, home"><img src="logo.png" alt="" width="52" height="52"><span>Kem<span>Ops</span></span></a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" data-menu-toggle><span></span><span></span><span></span><span class="sr-only">Apri menu</span></button>
       <nav id="main-nav" class="main-nav" aria-label="Navigazione principale" data-nav>
-        <a href="index.html">Home</a><a href="chi-siamo.html">Chi siamo</a><a href="servizi.html">Servizi</a><a href="metodo.html">Metodo</a><a class="nav-cta" href="tel:+393516663048">Chiama un operatore <span aria-hidden="true">&rarr;</span></a>
+        <a href="index.html">Home</a><a href="chi-siamo.html">Chi siamo</a><a href="servizi.html">Servizi</a><a href="metodo.html">Metodo</a><div class="nav-contact-actions" aria-label="Contatti rapidi"><a class="nav-contact-link nav-whatsapp" href="https://wa.me/393516663048?text=Ciao%20KemOps%2C%20vorrei%20ricevere%20una%20consulenza%20sul%20mio%20progetto." target="_blank" rel="noopener noreferrer">WhatsApp</a><a class="nav-contact-link nav-write" href="mailto:kemops.consulting@gmail.com">Scrivici</a><a class="nav-contact-link nav-form" href="contatti.html#contact-form">Modulo</a></div><a class="nav-cta" href="tel:+393516663048">Chiama un operatore <span aria-hidden="true">&rarr;</span></a>
       </nav>
     </div>
   </header>
@@ -42,17 +42,16 @@
           <p class="eyebrow"><span></span> Contatti</p>
           <h1>Parliamo della tua <em>prossima idea.</em></h1>
           <p>Per ricevere una consulenza, chiamaci: parlerai direttamente con un nostro operatore. Se preferisci, puoi inviare una richiesta dal modulo e ti ricontatteremo.</p>
-          <a class="button button-primary contact-call-button" href="tel:+393516663048">Chiama per una consulenza <span aria-hidden="true">&rarr;</span></a>
+          <div class="button-row contact-quick-actions"><a class="button button-primary contact-call-button" href="tel:+393516663048">Chiama <span aria-hidden="true">&rarr;</span></a><a class="button button-whatsapp" href="https://wa.me/393516663048?text=Ciao%20KemOps%2C%20vorrei%20ricevere%20una%20consulenza%20sul%20mio%20progetto." target="_blank" rel="noopener noreferrer">WhatsApp <span aria-hidden="true">↗</span></a><a class="button button-ghost contact-form-link" href="#contact-form">Scrivi dal modulo <span aria-hidden="true">↓</span></a></div>
           <div class="direct-contact">
             <span>Chiamaci direttamente</span><a href="tel:+393516663048">351 666 3048</a>
-            <span class="contact-email-label">Oppure scrivici</span><a class="contact-email" href="mailto:kemops.consulting@gmail.com">kemops.consulting@gmail.com</a>
+            <span class="contact-email-label">Scrivici per email</span><a class="contact-email" href="mailto:kemops.consulting@gmail.com">kemops.consulting@gmail.com</a><span class="contact-email-label">WhatsApp</span><a class="contact-whatsapp" href="https://wa.me/393516663048?text=Ciao%20KemOps%2C%20vorrei%20ricevere%20una%20consulenza%20sul%20mio%20progetto." target="_blank" rel="noopener noreferrer">Avvia una chat</a>
           </div>
         </div>
-        <form class="contact-form reveal" data-contact-form action="https://formsubmit.co/kemops.consulting@gmail.com" method="POST">
+        <form class="contact-form reveal" data-contact-form id="contact-form" action="https://formspree.io/f/meaaoydw" method="POST">
           <p class="form-intro">Preferisci lasciare un messaggio? Compila il modulo e ti ricontatteremo per fissare un primo confronto.</p>
           <input type="hidden" name="_subject" value="Nuova richiesta di consulenza KemOps">
-          <input type="hidden" name="_captcha" value="false">
-          <div class="contact-form-honeypot" aria-hidden="true"><label>Non compilare questo campo<input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></div>
+          <div class="contact-form-honeypot" aria-hidden="true"><label>Non compilare questo campo<input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
           <div class="field-row">
             <label>Nome e cognome<input name="name" type="text" autocomplete="name" required placeholder="Come ti chiami?"></label>
             <label>Email<input name="email" type="email" autocomplete="email" required placeholder="nome@azienda.it"></label>
@@ -61,7 +60,7 @@
           <label>Azienda <span>(facoltativo)</span><input name="company" type="text" autocomplete="organization" placeholder="La tua azienda"></label>
           <label>Di cosa hai bisogno?<select name="service" required><option value="">Seleziona un ambito</option><option>Web app o piattaforma</option><option>Software su misura</option><option>Applicazione mobile</option><option>Dati, cloud o integrazioni</option><option>Modelli AI, classificazione o visione artificiale</option><option>Non lo so ancora</option></select></label>
           <label>Il progetto<textarea name="message" rows="5" required placeholder="Obiettivi, situazione attuale, tempistiche..."></textarea></label>
-          <p class="form-privacy-note">Inviando il modulo, i dati saranno trasmessi a FormSubmit per inoltrare la richiesta a KemOps; il servizio dichiara di conservare le richieste per 30 giorni. Li useremo per rispondere. <a href="privacy.html">Leggi l'informativa privacy e cookie</a>. Non inserire dati sensibili non necessari.</p>
+          <p class="form-privacy-note">Useremo i dati per rispondere alla tua richiesta. Il modulo è gestito da Formspree, che li riceve e li inoltra a KemOps; sul piano gratuito lo storico è conservato per 30 giorni. <a href="privacy.html">Leggi l’informativa privacy e cookie</a>. Non inserire dati sensibili non necessari.</p>
           <button class="button button-primary submit-button" type="submit">Invia la richiesta <span aria-hidden="true">&rarr;</span></button>
           <p class="form-note" data-form-status role="status" aria-live="polite"></p>
           <a class="form-email-fallback" data-form-email-fallback href="mailto:kemops.consulting@gmail.com" hidden>Prepara un’email con la richiesta</a>
@@ -74,11 +73,12 @@
     <div class="container footer-grid">
       <div><a class="brand footer-brand" href="index.html"><img src="logo.png" alt="" width="44" height="44"><span>Kem<span>Ops</span></span></a><p>Tecnologia su misura.<br>Impatto concreto.</p></div>
       <div><h3>Esplora</h3><a href="chi-siamo.html">Chi siamo</a><a href="servizi.html">Servizi</a><a href="metodo.html">Metodo</a></div>
-      <div><h3>Contatti</h3><a href="tel:+393516663048">Chiama 351 666 3048</a><a href="mailto:kemops.consulting@gmail.com">kemops.consulting@gmail.com</a></div>
+      <div><h3>Contatti</h3><a href="tel:+393516663048">Chiama 351 666 3048</a><a href="mailto:kemops.consulting@gmail.com">kemops.consulting@gmail.com</a><a href="https://wa.me/393516663048?text=Ciao%20KemOps%2C%20vorrei%20ricevere%20una%20consulenza%20sul%20mio%20progetto." target="_blank" rel="noopener noreferrer">Scrivici su WhatsApp</a></div>
       <div class="footer-meta"><p>Italia - Lavoriamo ovunque</p><a href="privacy.html">Privacy e cookie</a><a href="note-legali.html">Note legali</a></div>
     </div>
     <div class="container footer-bottom"><span>&copy; <span data-year></span> KemOps</span><span>WEB - SOFTWARE - APP - AI</span></div>
   </footer>
-  <script src="assets/js/main.js?v=20261024" defer></script>
+  <nav class="mobile-contact-cta" aria-label="Contatti rapidi"><a class="mobile-whatsapp" href="https://wa.me/393516663048?text=Ciao%20KemOps%2C%20vorrei%20ricevere%20una%20consulenza%20sul%20mio%20progetto." target="_blank" rel="noopener noreferrer" aria-label="Scrivici su WhatsApp">WhatsApp</a><a class="mobile-form" href="contatti.html#contact-form" aria-label="Vai al modulo di contatto">Modulo</a><a class="mobile-call" href="tel:+393516663048" aria-label="Chiama KemOps">Chiama</a></nav>
+  <script src="assets/js/main.js?v=20261024-contact" defer></script>
 </body>
 </html>
