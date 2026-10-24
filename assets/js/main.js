@@ -62,18 +62,32 @@ if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: re
   revealItems.forEach(item => item.classList.add('visible'));
 }
 
-document.querySelector('[data-contact-form]')?.addEventListener('submit', event => {
+document.querySelector('[data-contact-form]')?.addEventListener('submit', async event => {
   event.preventDefault();
-  const data = new FormData(event.currentTarget);
-  const subject = `Nuovo progetto — ${data.get('name')}`;
-  const body = [
-    `Nome: ${data.get('name')}`,
-    `Email: ${data.get('email')}`,
-    `Azienda: ${data.get('company') || 'Non indicata'}`,
-    `Ambito: ${data.get('service')}`,
-    '',
-    'Progetto:',
-    data.get('message')
-  ].join('\n');
-  location.href = `mailto:info@kemops.it?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  const form = event.currentTarget;
+  const submitButton = form.querySelector('[type="submit"]');
+  const status = form.querySelector('[data-form-status]');
+  if (submitButton) submitButton.disabled = true;
+  if (status) status.textContent = 'Invio della richiesta in corso...';
+
+  try {
+    const response = await fetch('https://formsubmit.co/ajax/kemops.consulting@gmail.com', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(Object.fromEntries(new FormData(form).entries()))
+    });
+    const result = await response.json();
+    if (!response.ok || String(result.success).toLowerCase() !== 'true') {
+      throw new Error('Form submission failed');
+    }
+    form.reset();
+    if (status) status.textContent = 'Richiesta inviata. Ti ricontatteremo per organizzare un primo confronto.';
+  } catch {
+    if (status) status.textContent = 'Invio non riuscito. Riprova oppure chiamaci al 351 666 3048.';
+  } finally {
+    if (submitButton) submitButton.disabled = false;
+  }
 });

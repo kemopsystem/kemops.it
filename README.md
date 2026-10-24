@@ -10,4 +10,4 @@ Apri `index.html` direttamente nel browser oppure avvia un server statico dalla 
 
 Ogni push sul branch `main` avvia il workflow GitHub Pages. Il file `CNAME` configura il dominio personalizzato `kemops.it`.
 
-Prima della pubblicazione commerciale, completare i dati societari nell'informativa privacy e verificare l'indirizzo `info@kemops.it`.
+Prima della pubblicazione commerciale, completare i dati del titolare nell'informativa privacy. Il modulo contatti usa FormSubmit: dopo la prima richiesta, confermare l'indirizzo `kemops.consulting@gmail.com` dall'email di attivazione del servizio.

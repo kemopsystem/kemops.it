@@ -307,6 +307,23 @@ h1 em, h2 em, blockquote em { color: var(--cyan-bright); font-style: normal; }
   .reveal { opacity: 1; transform: none; }
 }
 
+.contact-call-button { margin-top: 18px; }
+.direct-contact .contact-email-label { margin-top: 22px; }
+.direct-contact a.contact-email { max-width: 100%; font-size: .95rem; overflow-wrap: anywhere; }
+.form-intro { margin: 0 0 28px; font-size: 1.05rem; font-weight: 700; line-height: 1.5; }
+.contact-form-honeypot { display: none !important; }
+.form-followup { margin: 16px 0 0; color: var(--muted); font-size: .78rem; line-height: 1.6; }
+.form-followup a { color: #087d9a; font-weight: 700; text-decoration: underline; }
+.form-note:empty { display: none; }
+.form-note { color: #087d9a; line-height: 1.6; }
+.submit-button:disabled { opacity: .65; cursor: wait; transform: none; }
+
+@media (max-width: 640px) {
+  .contact-call-button { width: 100%; margin-top: 12px; }
+  .direct-contact a.contact-email { font-size: .9rem; }
+  .form-intro { margin-bottom: 24px; font-size: 1rem; }
+}
+
 /* Additional content and mobile-first refinements */
 :focus-visible { outline: 3px solid var(--cyan); outline-offset: 4px; }
 .site-header { z-index: 100; }
