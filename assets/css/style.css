@@ -465,13 +465,14 @@ h1 em, h2 em, blockquote em { color: var(--cyan-bright); font-style: normal; }
   .fit-list p { gap: 14px; padding: 17px 0; }
   .possibilities-section .section-heading { margin-bottom: 34px; }
   .possibility-grid { grid-template-columns: 1fr; }
-  .possibility-card { min-height: 0; padding: 22px; }
-  .possibility-image { aspect-ratio: 16 / 9; margin-bottom: 18px; }
+  .possibility-card { display: grid; grid-template-columns: 112px minmax(0, 1fr); column-gap: 14px; align-items: start; min-height: 0; padding: 14px; }
+  .possibility-image { grid-column: 1; grid-row: 1; width: 100%; height: auto; aspect-ratio: 16 / 9; margin: 0; }
+  .possibility-icon { grid-column: 2; grid-row: 1; display: block; width: auto; height: auto; color: var(--cyan); border: 0; font-size: .68rem; line-height: 1; }
+  .possibility-type { grid-column: 2; grid-row: 2; margin: 4px 0 7px; font-size: .58rem; }
+  .possibility-card h3 { grid-column: 2; grid-row: 3; margin: 0 0 7px; font-size: 1.08rem; line-height: 1.2; }
+  .possibility-card > p:not(.possibility-type) { grid-column: 2; grid-row: 4; display: -webkit-box; overflow: hidden; margin: 0; font-size: .82rem; line-height: 1.48; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
+  .possibility-tags { grid-column: 2; grid-row: 5; margin-top: 9px; font-size: .62rem; line-height: 1.35; }
   .editorial-photo img { aspect-ratio: 16 / 9; }
-  .possibility-type { margin-top: 22px; }
-  .possibility-card h3 { font-size: 1.3rem; }
-  .possibility-card > p:not(.possibility-type) { font-size: .92rem; }
-  .possibility-tags { margin-top: 17px; }
   .illustrative-note { font-size: .73rem; }
   .process-card { grid-template-columns: 38px minmax(0, 1fr); gap: 8px; padding: 18px 0; }
   .process-card h3 { font-size: 1.2rem; }
