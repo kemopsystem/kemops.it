@@ -197,7 +197,15 @@ h1 em, h2 em, blockquote em { color: var(--cyan-bright); font-style: normal; }
 .contact-copy { position: sticky; top: 140px; }
 #contact-form { scroll-margin-top: 110px; }
 .contact-quick-actions { margin: 30px 0 0; }
-.contact-quick-actions .button { gap: 8px; padding-inline: 14px; font-size: .78rem; }
+.contact-quick-actions .button { min-height: 58px; gap: 11px; padding: 7px 20px 7px 9px; border-radius: 999px; font-size: .9rem; font-weight: 750; box-shadow: 0 10px 25px rgba(0,0,0,.16); }
+.contact-quick-actions .contact-call-button { border: 1px solid rgba(8,197,220,.8); }
+.contact-quick-actions .contact-call-button, .contact-quick-actions .button-whatsapp { min-width: 184px; justify-content: space-between; }
+.contact-quick-actions .button-whatsapp { border-color: #168a52; }
+.contact-action-icon { display: inline-grid; flex: 0 0 40px; width: 40px; height: 40px; place-items: center; border-radius: 50%; background: rgba(4,20,47,.1); }
+.contact-action-icon svg { display: block; width: 21px; height: 21px; }
+.contact-quick-actions .button-whatsapp .contact-action-icon { background: rgba(255,255,255,.16); }
+.contact-action-arrow { margin-left: auto; font-size: 1rem; opacity: .75; }
+@media (min-width: 641px) { .contact-quick-actions .contact-form-link { display: none; } }
 .contact-copy h1 { font-size: clamp(3.3rem,5.4vw,6rem); line-height: .98; letter-spacing: -.065em; margin-bottom: 30px; }
 .contact-copy > p:not(.eyebrow) { color: rgba(255,255,255,.62); max-width: 520px; font-size: 1.08rem; line-height: 1.7; }
 .direct-contact { margin-top: 55px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.15); }
