@@ -351,6 +351,14 @@ h1 em, h2 em, blockquote em { color: var(--cyan-bright); font-style: normal; }
   .service-jump .container { gap: 20px; }
 }
 
+@media (max-width: 760px) {
+  .hero-grid { gap: 0; }
+  .hero-visual { position: relative; right: auto; bottom: auto; width: min(100%, 390px); justify-self: center; margin: 28px auto 0; opacity: 1; pointer-events: none; }
+  .signal { width: min(112px, 38%); padding: 8px 9px; }
+  .signal strong { font-size: .9rem; }
+  .signal span { font-size: .58rem; }
+}
+
 @media (max-width: 640px) {
   html { scroll-padding-top: 78px; }
   .container { width: min(calc(100% - 32px), var(--max)); }
@@ -367,8 +375,7 @@ h1 em, h2 em, blockquote em { color: var(--cyan-bright); font-style: normal; }
   .button-row { display: grid; grid-template-columns: 1fr; gap: 10px; }
   .button-row .button { width: 100%; min-height: 52px; }
   .hero-proof { gap: 9px; margin-top: 28px; font-size: .64rem; letter-spacing: .1em; }
-  .hero-visual { width: 85vw; right: -34vw; bottom: -36vw; opacity: .28; pointer-events: none; }
-  .signal { transform: scale(.8); transform-origin: center; }
+  .hero-visual { width: min(100%, 340px); margin-top: 22px; }
   .section { padding: 76px 0; }
   .section-heading { gap: 20px; }
   .section-heading .eyebrow, .eyebrow { margin-bottom: 18px; font-size: .65rem; letter-spacing: .12em; }
