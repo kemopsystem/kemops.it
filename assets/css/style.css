@@ -308,6 +308,8 @@ h1 em, h2 em, blockquote em { color: var(--cyan-bright); font-style: normal; }
 .form-followup a { color: #087d9a; font-weight: 700; text-decoration: underline; }
 .form-note:empty { display: none; }
 .form-note { color: #087d9a; line-height: 1.6; }
+.form-email-fallback { display: inline-flex; margin: 12px 0 0; color: #087d9a; font-size: .82rem; font-weight: 700; text-decoration: underline; }
+.form-email-fallback[hidden] { display: none; }
 .submit-button:disabled { opacity: .65; cursor: wait; transform: none; }
 
 @media (max-width: 640px) {

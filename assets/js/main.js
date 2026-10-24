@@ -67,7 +67,31 @@ document.querySelector('[data-contact-form]')?.addEventListener('submit', async 
   const form = event.currentTarget;
   const submitButton = form.querySelector('[type="submit"]');
   const status = form.querySelector('[data-form-status]');
+  const emailFallback = form.querySelector('[data-form-email-fallback]');
+  const formData = new FormData(form);
+  const controller = new AbortController();
+  const timeoutId = window.setTimeout(() => controller.abort(), 15000);
+
+  const prepareEmailFallback = () => {
+    if (!emailFallback) return;
+    const lines = [
+      `Nome e cognome: ${formData.get('name') || ''}`,
+      `Email: ${formData.get('email') || ''}`,
+      formData.get('phone') ? `Telefono: ${formData.get('phone')}` : null,
+      formData.get('company') ? `Azienda: ${formData.get('company')}` : null,
+      `Ambito: ${formData.get('service') || ''}`,
+      '',
+      'Progetto:',
+      String(formData.get('message') || '')
+    ].filter(line => line !== null);
+    const subject = 'Richiesta di consulenza dal sito KemOps';
+    emailFallback.href = `mailto:kemops.consulting@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
+    emailFallback.hidden = false;
+  };
+
   if (submitButton) submitButton.disabled = true;
+  if (emailFallback) emailFallback.hidden = true;
+  form.setAttribute('aria-busy', 'true');
   if (status) status.textContent = 'Invio della richiesta in corso...';
 
   try {
@@ -77,17 +101,26 @@ document.querySelector('[data-contact-form]')?.addEventListener('submit', async 
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify(Object.fromEntries(new FormData(form).entries()))
+      body: JSON.stringify(Object.fromEntries(formData.entries())),
+      signal: controller.signal
     });
     const result = await response.json();
     if (!response.ok || String(result.success).toLowerCase() !== 'true') {
-      throw new Error('Form submission failed');
+      throw new Error('FormSubmit did not confirm the request');
     }
     form.reset();
+    if (emailFallback) emailFallback.hidden = true;
     if (status) status.textContent = 'Richiesta inviata. Ti ricontatteremo per organizzare un primo confronto.';
-  } catch {
-    if (status) status.textContent = 'Invio non riuscito. Riprova oppure chiamaci al 351 666 3048.';
+  } catch (error) {
+    prepareEmailFallback();
+    if (error.name === 'AbortError') {
+      if (status) status.textContent = 'Il servizio non ha confermato l’invio entro 15 secondi. La richiesta potrebbe comunque essere arrivata: controlla la casella prima di reinviarla. Se non la trovi, puoi preparare un’email con gli stessi dati qui sotto.';
+    } else if (status) {
+      status.textContent = 'Non ho ricevuto conferma dell’invio automatico. Controlla la casella; se la richiesta non è arrivata, puoi preparare un’email con gli stessi dati qui sotto.';
+    }
   } finally {
+    window.clearTimeout(timeoutId);
+    form.removeAttribute('aria-busy');
     if (submitButton) submitButton.disabled = false;
   }
 });
