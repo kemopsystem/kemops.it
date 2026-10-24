@@ -11,17 +11,35 @@ menuToggle?.addEventListener('click', () => {
   nav.classList.toggle('open', open);
   document.body.classList.toggle('menu-open', open);
   menuToggle.setAttribute('aria-expanded', String(open));
+  const menuLabel = menuToggle.querySelector('.sr-only');
+  if (menuLabel) menuLabel.textContent = open ? 'Chiudi menu' : 'Apri menu';
 });
 
 nav?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
   nav.classList.remove('open');
   document.body.classList.remove('menu-open');
   menuToggle?.setAttribute('aria-expanded', 'false');
+  const menuLabel = menuToggle?.querySelector('.sr-only');
+  if (menuLabel) menuLabel.textContent = 'Apri menu';
 }));
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && nav?.classList.contains('open')) {
+    nav.classList.remove('open');
+    document.body.classList.remove('menu-open');
+    menuToggle?.setAttribute('aria-expanded', 'false');
+    const menuLabel = menuToggle?.querySelector('.sr-only');
+    if (menuLabel) menuLabel.textContent = 'Apri menu';
+    menuToggle?.focus();
+  }
+});
 
 const currentPage = location.pathname.split('/').pop() || 'index.html';
 nav?.querySelectorAll('a').forEach(link => {
-  if (link.getAttribute('href') === currentPage) link.classList.add('active');
+  if (link.getAttribute('href') === currentPage) {
+    link.classList.add('active');
+    link.setAttribute('aria-current', 'page');
+  }
 });
 
 document.querySelectorAll('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
