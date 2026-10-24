@@ -68,6 +68,11 @@ document.querySelector('[data-contact-form]')?.addEventListener('submit', async 
   const submitButton = form.querySelector('[type="submit"]');
   const status = form.querySelector('[data-form-status]');
   const emailFallback = form.querySelector('[data-form-email-fallback]');
+  const setFormStatus = (message, state) => {
+    if (!status) return;
+    status.dataset.state = state;
+    status.textContent = message;
+  };
   const formData = new FormData(form);
   const controller = new AbortController();
   const timeoutId = window.setTimeout(() => controller.abort(), 20000);
@@ -92,7 +97,7 @@ document.querySelector('[data-contact-form]')?.addEventListener('submit', async 
   if (submitButton) submitButton.disabled = true;
   if (emailFallback) emailFallback.hidden = true;
   form.setAttribute('aria-busy', 'true');
-  if (status) status.textContent = 'Invio della richiesta in corso...';
+  setFormStatus('Invio della richiesta in corso...', 'pending');
 
   try {
     const response = await fetch(form.action, {
@@ -116,9 +121,10 @@ document.querySelector('[data-contact-form]')?.addEventListener('submit', async 
     }
     form.reset();
     if (emailFallback) emailFallback.hidden = true;
-    if (status) status.textContent = 'Richiesta inviata. Ti ricontatteremo per organizzare un primo confronto.';
+    setFormStatus('Richiesta inviata. Ti ricontatteremo per organizzare un primo confronto.', 'success');
   } catch (error) {
     prepareEmailFallback();
+    if (status) status.dataset.state = 'error';
     if (error.name === 'AbortError') {
       if (status) status.textContent = 'Il servizio non ha confermato l’invio entro 20 secondi. La richiesta potrebbe essere arrivata: controlla la casella o l’area Formspree prima di reinviarla. In alternativa, puoi preparare un’email qui sotto.';
     } else if (status) {
