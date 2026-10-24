@@ -199,7 +199,7 @@ h1 em, h2 em, blockquote em { color: var(--cyan-bright); font-style: normal; }
 .contact-quick-actions { margin: 30px 0 0; }
 .contact-quick-actions .button { min-height: 58px; gap: 11px; padding: 7px 20px 7px 9px; border-radius: 999px; font-size: .9rem; font-weight: 750; box-shadow: 0 10px 25px rgba(0,0,0,.16); }
 .contact-quick-actions .contact-call-button { border: 1px solid rgba(8,197,220,.8); }
-.contact-quick-actions .contact-call-button, .contact-quick-actions .button-whatsapp { min-width: 184px; justify-content: space-between; }
+.contact-quick-actions .contact-call-button, .contact-quick-actions .button-whatsapp { width: 184px; min-width: 184px; flex: 0 0 184px; justify-content: space-between; }
 .contact-quick-actions .button-whatsapp { border-color: #168a52; }
 .contact-action-icon { display: inline-grid; flex: 0 0 40px; width: 40px; height: 40px; place-items: center; border-radius: 50%; background: rgba(4,20,47,.1); }
 .contact-action-icon svg { display: block; width: 21px; height: 21px; }
