@@ -182,7 +182,7 @@
     serviceDisplay.innerHTML = service.stage;
     $('#service-title').textContent = service.title;
     $('#service-description').textContent = service.description;
-    $('#service-cta').href = `mailto:kemops.consulting@gmail.com?subject=${encodeURIComponent(`KemOps - ${service.email}`)}`;
+    $('#service-cta').href = `mailto:info@kemops.it?subject=${encodeURIComponent(`KemOps - ${service.email}`)}`;
     if (focus) serviceTabs[index].focus();
   }
   serviceTabs.forEach((tab, index) => {

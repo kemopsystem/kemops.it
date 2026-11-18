@@ -90,7 +90,7 @@ document.querySelector('[data-contact-form]')?.addEventListener('submit', async 
       String(formData.get('message') || '')
     ].filter(line => line !== null);
     const subject = 'Richiesta di consulenza dal sito KemOps';
-    emailFallback.href = `mailto:kemops.consulting@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
+    emailFallback.href = `mailto:info@kemops.it?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
     emailFallback.hidden = false;
   };
 
