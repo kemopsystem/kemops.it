@@ -117,26 +117,22 @@
   }
 
   // Four interactive service prototypes, modeled only on KemOps' actual services.
-  const frame = (category, graphic, footnote) => `
+  const frame = (category, graphic) => `
     <div class="service-stage-stage" data-stage="${category}">
       <div class="stage-corner top-left"></div><div class="stage-corner bottom-right"></div>
-      <div class="stage-label">LIVE CONCEPT <span>●</span> ${category.toUpperCase()}</div>
       ${graphic}
-      <div class="stage-floating-label"><span class="f-dot"></span>${footnote}</div>
     </div>`;
   const dashboard = $('.service-stage-stage').outerHTML;
   const services = [
     {
-      name: 'Web app & piattaforme', title: 'Diamo spazio alle grandi idee.',
+      title: 'Web app e piattaforme',
       description: 'Progettiamo e sviluppiamo web app e piattaforme digitali veloci, accessibili e pronte a crescere insieme al tuo progetto.',
-      tags: ['Web application','Dashboard','Portali','Integrazioni'],
       email: 'Progetto web app e piattaforme',
       stage: dashboard
     },
     {
-      name: 'Software su misura', title: 'La tecnologia segue il tuo modo di lavorare.',
+      title: 'Software su misura',
       description: 'Disegniamo strumenti, architetture e integrazioni intorno ai processi reali del tuo team, invece di forzare il team dentro strumenti rigidi.',
-      tags: ['Software gestionale','API','Automazione','Architettura'],
       email: 'Progetto software su misura',
       stage: frame('software architecture', `
         <div class="stage-architecture">
@@ -144,30 +140,28 @@
           <div class="architecture-ring"></div><div class="architecture-core">CORE / OPS</div>
           <div class="architecture-node a">PROCESSI</div><div class="architecture-node b">SISTEMI</div>
           <div class="architecture-node c">WORKFLOW</div><div class="architecture-node d">API</div>
-        </div>`, 'UN UNICO ECOSISTEMA, COSTRUITO ATTORNO A TE')
+        </div>`)
     },
     {
-      name: 'Applicazioni mobile', title: 'Il tuo prodotto, sempre a portata di mano.',
+      title: 'Applicazioni mobile',
       description: 'Dalla strategia al rilascio, creiamo esperienze mobile native o multipiattaforma pensate per accompagnare gli utenti nel loro contesto quotidiano.',
-      tags: ['iOS & Android','UX / UI','Multipiattaforma','Integrazioni'],
       email: 'Progetto applicazione mobile',
       stage: frame('mobile experience', `
         <div class="stage-phone-orbit"></div><div class="stage-phone-orbit two"></div>
-        <div class="stage-phone"><div class="stage-phone-head">KEMOPS / MOBILE</div><h4>Progetti in<br>movimento.</h4>
-          <div class="stage-phone-card"><small>ATTIVITÀ / WORKSPACE</small><span></span><span></span><span></span></div>
+        <div class="stage-phone">
+          <div class="stage-phone-card"><span></span><span></span><span></span></div>
           <div class="stage-phone-nav"><span>⌂</span><span>◎</span><span>▦</span></div>
-        </div>`, 'INTERFACCE PROGETTATE PER IL MONDO REALE')
+        </div>`)
     },
     {
-      name: 'Modelli AI specializzati', title: 'Intelligenza, dove crea valore.',
+      title: 'Modelli AI specializzati',
       description: 'Valutiamo e sviluppiamo modelli per compiti specifici, dalla classificazione dei dati alla visione artificiale, dopo aver verificato dati e fattibilità.',
-      tags: ['Classificazione','Computer vision','Modelli specializzati','Fattibilità'],
       email: 'Progetto modello AI specializzato',
       stage: frame('specialized ai', `
         <div class="stage-ai"><div class="ai-connection"></div><div class="ai-flow-line"></div>
           <div class="ai-core"><span>AI</span></div><div class="ai-flow-label left">INPUT / DATI</div>
           <div class="ai-flow-label right">OUTPUT / INSIGHT</div>
-        </div>`, 'MODELLI SPECIALIZZATI / FATTIBILITÀ PRIMA DI TUTTO')
+        </div>`)
     }
   ];
   let activeService = 0;
@@ -186,12 +180,8 @@
     });
     servicePanel.setAttribute('aria-labelledby', `service-tab-${index}`);
     serviceDisplay.innerHTML = service.stage;
-    $('#service-category').textContent = service.name.toUpperCase();
     $('#service-title').textContent = service.title;
     $('#service-description').textContent = service.description;
-    $('#service-tags').replaceChildren(...service.tags.map(tag => {
-      const span = document.createElement('span'); span.textContent = tag; return span;
-    }));
     $('#service-cta').href = `mailto:kemops.consulting@gmail.com?subject=${encodeURIComponent(`KemOps - ${service.email}`)}`;
     if (focus) serviceTabs[index].focus();
   }
@@ -235,7 +225,7 @@
   // Procedural orbit universe: drawn from scratch, no third-party images or models.
   // Elliptical orbit paths + parallax field + spherical latitude/longitude mapping.
   const canvas = $('#orbit-canvas');
-  if (!canvas) return;
+  if (!canvas || getComputedStyle(heroViz).display === 'none') return;
   const ctx = canvas.getContext('2d', {alpha:true});
   if (!ctx) return;
   let W=0,H=0,DPR=1,visible=true,raf=0,frameTime=0;
